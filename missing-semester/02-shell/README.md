@@ -177,8 +177,238 @@ project2  project3  project42
 [phunc20@homography-x220t 02-shell]$ rm project*
 [phunc20@homography-x220t 02-shell]$ ls
 foobar_check.sh  README.md
-[phunc20@homography-x220t 02-shell]$
+~/.../youtube/missing-semester/02-shell ❯❯❯ touch proj{1,2,3}/src/test{1,2,3}.c
+touch: cannot touch 'proj1/src/test1.c': No such file or directory
+touch: cannot touch 'proj1/src/test2.c': No such file or directory
+touch: cannot touch 'proj1/src/test3.c': No such file or directory
+touch: cannot touch 'proj2/src/test1.c': No such file or directory
+touch: cannot touch 'proj2/src/test2.c': No such file or directory
+touch: cannot touch 'proj2/src/test3.c': No such file or directory
+touch: cannot touch 'proj3/src/test1.c': No such file or directory
+touch: cannot touch 'proj3/src/test2.c': No such file or directory
+touch: cannot touch 'proj3/src/test3.c': No such file or directory
+~/.../youtube/missing-semester/02-shell ❯❯❯ mkdir foo bar
+~/.../youtube/missing-semester/02-shell ❯❯❯ ll
+total 20
+-rwxr-xr-x 1 phunc20 wheel  442 Dec  5 16:17 foobar_check.sh
+-rw-r--r-- 1 phunc20 wheel 7843 Dec  6 10:29 README.md
+drwxr-xr-x 2 phunc20 wheel 4096 Dec  6 10:30 foo
+drwxr-xr-x 2 phunc20 wheel 4096 Dec  6 10:30 bar
+~/.../youtube/missing-semester/02-shell ❯❯❯ touch {foo,bar}/{a..j}.txt
+~/.../youtube/missing-semester/02-shell ❯❯❯ tree {foo,bar}
+foo
+├── a.txt
+├── b.txt
+├── c.txt
+├── d.txt
+├── e.txt
+├── f.txt
+├── g.txt
+├── h.txt
+├── i.txt
+└── j.txt
+bar
+├── a.txt
+├── b.txt
+├── c.txt
+├── d.txt
+├── e.txt
+├── f.txt
+├── g.txt
+├── h.txt
+├── i.txt
+└── j.txt
 
+0 directories, 20 files
+~/.../youtube/missing-semester/02-shell ❯❯❯ touch foo/x bar/y
+~/.../youtube/missing-semester/02-shell ❯❯❯ diff <(ls foo) <(ls bar)
+11c11
+< x
+---
+> y
+~/.../youtube/missing-semester/02-shell ❯❯❯ # Some Python code
+~/.../youtube/missing-semester/02-shell ❯❯❯ python 02_print_args.py 10 15 20
+20 15 10 ~/.../youtube/missing-semester/02-shell ❯❯❯ cat 02_print_args.py
+import sys
+for arg in reversed(sys.argv[1:]):
+    print(arg, end=' ')
+~/.../youtube/missing-semester/02-shell ❯❯❯
+~/.../youtube/missing-semester/02-shell ❯❯❯ chmod +x 03_shebang.py
+~/.../youtube/missing-semester/02-shell ❯❯❯ ./03_shebang.py
+~/.../youtube/missing-semester/02-shell ❯❯❯ ./03_shebang.py a b c ... x y z
+z y x ... c b a ~/.../youtube/missing-semester/02-shell ❯❯❯ cat 03_shebang.py
+#!/usr/bin/python
+# I found the above path using the command `which python`
+import sys
+for arg in reversed(sys.argv[1:]):
+    print(arg, end=' ')
+~/.../youtube/missing-semester/02-shell ❯❯❯
+~/.../youtube/missing-semester/02-shell ❯❯❯ workon dsp-py3.8
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ which python
+/home/phunc20/.virtualenvs/dsp-py3.8/bin/python
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ cat <(which python) 04_shebang.py
+/home/phunc20/.virtualenvs/dsp-py3.8/bin/python
+#!/usr/bin/python
+# I found the above path using the command `which python`
+import sys
+for arg in reversed(sys.argv[1:]):
+    print(arg, end=' ')
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ cat <(echo "#!") <(which python) 04_shebang.py
+#!
+/home/phunc20/.virtualenvs/dsp-py3.8/bin/python
+#!/usr/bin/python
+# I found the above path using the command `which python`
+import sys
+for arg in reversed(sys.argv[1:]):
+    print(arg, end=' ')
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ cat <(printf "#!") <(which python) 04_shebang.py
+#!/home/phunc20/.virtualenvs/dsp-py3.8/bin/python
+#!/usr/bin/python
+# I found the above path using the command `which python`
+import sys
+for arg in reversed(sys.argv[1:]):
+    print(arg, end=' ')
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ cat <(printf "#!") <(which python) 03_shebang.py
+#!/home/phunc20/.virtualenvs/dsp-py3.8/bin/python
+#!/usr/bin/python
+# I found the above path using the command `which python`
+import sys
+for arg in reversed(sys.argv[1:]):
+    print(arg, end=' ')
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ cat <(printf "#!") <(which python) 03_shebang.py > 04_shebang.py
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ cat 04_shebang.py
+#!/home/phunc20/.virtualenvs/dsp-py3.8/bin/python
+#!/usr/bin/python
+# I found the above path using the command `which python`
+import sys
+for arg in reversed(sys.argv[1:]):
+    print(arg, end=' ')
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ ll 04_shebang.py
+-rwxr-xr-x 1 phunc20 wheel 196 Dec  6 10:43 04_shebang.py
+(dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ ./04_shebang.py 10 15 20 25
+25 20 15 10 (dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯
+25 20 15 10 (dsp-py3.8) ~/.../youtube/missing-semester/02-shell ❯❯❯ deactivate
+~/.../youtube/missing-semester/02-shell ❯❯❯ cp 03_shebang.py 05_shebang.py
+~/.../youtube/missing-semester/02-shell ❯❯❯ vim 05_shebang.py
+~/.../youtube/missing-semester/02-shell ❯❯❯ head -1 05_shebang.py
+#!/usr/bin/env python
+~/.../youtube/missing-semester/02-shell ❯❯❯ ./05_shebang.py a b c ... x y z
+z y x ... c b a ~/.../youtube/missing-semester/02-shell ❯❯❯ cp 05_shebang.py 06_shebang.py
+~/.../youtube/missing-semester/02-shell ❯❯❯ vim 06_shebang.py
+~/.../youtube/missing-semester/02-shell ❯❯❯ head -1 05_shebang.py
+#!/usr/bin/env python2
+~/.../youtube/missing-semester/02-shell ❯❯❯ ./06_shebang.py a b c ... x y z
+  File "./06_shebang.py", line 5
+      print(arg, end=' ')
+                        ^
+SyntaxError: invalid syntax
+~/.../youtube/missing-semester/02-shell ❯❯❯ vim 06_shebang.py
+~/.../youtube/missing-semester/02-shell ❯❯❯ ./06_shebang.py a b c ... x y z
+z
+y
+x
+...
+c
+b
+a
+~/.../youtube/missing-semester/02-shell ❯❯❯ cat 06_shebang.py
+#!/usr/bin/env python2
+# I found the above path using the command `which python`
+import sys
+for arg in reversed(sys.argv[1:]):
+    #print(arg, end=' ')
+    print arg
+~/.../youtube/missing-semester/02-shell ❯❯❯
+importlib.metadata.PackageNotFoundError: tldr
+~/.../youtube/missing-semester/02-shell ❯❯❯ pacman -S tldr
+~/.../youtube/missing-semester/02-shell ❯❯❯ tldr tar
+Traceback (most recent call last):
+  File "/usr/bin/tldr", line 33, in <module>
+    sys.exit(load_entry_point('tldr==1.1.0', 'console_scripts', 'tldr')())
+  File "/usr/bin/tldr", line 22, in importlib_load_entry_point
+    for entry_point in distribution(dist_name).entry_points
+  File "/usr/lib/python3.8/importlib/metadata.py", line 504, in distribution
+    return Distribution.from_name(distribution_name)
+  File "/usr/lib/python3.8/importlib/metadata.py", line 177, in from_name
+    raise PackageNotFoundError(name)
+importlib.metadata.PackageNotFoundError: tldr
+~/.../youtube/missing-semester/02-shell ❯❯❯
+~/.../youtube/missing-semester/02-shell ❯❯❯ locate resolution
+locate: can not stat () `/var/lib/mlocate/mlocate.db': No such file or directory
+~/.../youtube/missing-semester/02-shell ❯❯❯ updatedb
+updatedb: can not open a temporary file for `/var/lib/mlocate/mlocate.db'
+~/.../youtube/missing-semester/02-shell ❯❯❯
+~/.../youtube/missing-semester/02-shell ❯❯❯ grep -R foo .
+./README.md:[phunc20@homography-x220t 02-shell]$ foo=bar
+./README.md:[phunc20@homography-x220t 02-shell]$ echo $foo
+./README.md:[phunc20@homography-x220t 02-shell]$ foo=bear
+./README.md:[phunc20@homography-x220t 02-shell]$ echo $foo
+./README.md:[phunc20@homography-x220t 02-shell]$ foo = bar
+./README.md:-bash: foo: command not found
+./README.md:[phunc20@homography-x220t 02-shell]$ # The previous is understood as "run the foo command with args: = and bar"
+./README.md:[phunc20@homography-x220t 02-shell]$ echo "$foo"
+./README.md:[phunc20@homography-x220t 02-shell]$ echo '$foo'
+./README.md:$foo
+./README.md:[phunc20@homography-x220t 02-shell]$ echo "${foo}"
+./README.md:[phunc20@homography-x220t 02-shell]$ echo "$(foo)"
+./README.md:-bash: foo: command not found
+./README.md:[phunc20@homography-x220t 02-shell]$ grep foobar ~/.useful-scripts/mkcd.sh
+./README.md:[phunc20@homography-x220t 02-shell]$ grep foobar ~/.useful-scripts/mkcd.sh 2&>1
+./README.md:[phunc20@homography-x220t 02-shell]$ grep foobar ~/.useful-scripts/mkcd.sh &>
+./README.md:[phunc20@homography-x220t 02-shell]$ ./foobar_check.sh ../*
+./README.md:Run program ./foobar_check.sh with 2 args and with pid 6376
+./README.md:../02-shell contains no word "foobar"
+./README.md:../progress.md contains no word "foobar"
+./README.md:│   ├── foobar_check.sh
+./README.md:foobar_check.sh  project2  project42
+./README.md:foobar_check.sh  README.md
+./README.md:~/.../youtube/missing-semester/02-shell ❯❯❯ mkdir foo bar
+./README.md:-rwxr-xr-x 1 phunc20 wheel  442 Dec  5 16:17 foobar_check.sh
+./README.md:drwxr-xr-x 2 phunc20 wheel 4096 Dec  6 10:30 foo
+./README.md:~/.../youtube/missing-semester/02-shell ❯❯❯ touch {foo,bar}/{a..j}.txt
+./README.md:~/.../youtube/missing-semester/02-shell ❯❯❯ tree {foo,bar}
+./README.md:foo
+./README.md:~/.../youtube/missing-semester/02-shell ❯❯❯ touch foo/x bar/y
+./README.md:~/.../youtube/missing-semester/02-shell ❯❯❯ diff <(ls foo) <(ls bar)
+./01_foobar_check.sh:  grep foobar "$file" > /dev/null 2> /dev/null
+./01_foobar_check.sh:  # the word "foobar", which can be reflected by the
+./01_foobar_check.sh:    echo "$file contains no word \"foobar\""
+~/.../youtube/missing-semester/02-shell ❯❯❯ grep -Rn foo .
+./README.md:2:[phunc20@homography-x220t 02-shell]$ foo=bar
+./README.md:3:[phunc20@homography-x220t 02-shell]$ echo $foo
+./README.md:5:[phunc20@homography-x220t 02-shell]$ foo=bear
+./README.md:6:[phunc20@homography-x220t 02-shell]$ echo $foo
+./README.md:8:[phunc20@homography-x220t 02-shell]$ foo = bar
+./README.md:9:-bash: foo: command not found
+./README.md:10:[phunc20@homography-x220t 02-shell]$ # The previous is understood as "run the foo command with args: = and bar"
+./README.md:15:[phunc20@homography-x220t 02-shell]$ echo "$foo"
+./README.md:17:[phunc20@homography-x220t 02-shell]$ echo '$foo'
+./README.md:18:$foo
+./README.md:19:[phunc20@homography-x220t 02-shell]$ echo "${foo}"
+./README.md:21:[phunc20@homography-x220t 02-shell]$ echo "$(foo)"
+./README.md:22:-bash: foo: command not found
+./README.md:89:[phunc20@homography-x220t 02-shell]$ grep foobar ~/.useful-scripts/mkcd.sh
+./README.md:92:[phunc20@homography-x220t 02-shell]$ grep foobar ~/.useful-scripts/mkcd.sh 2&>1
+./README.md:93:[phunc20@homography-x220t 02-shell]$ grep foobar ~/.useful-scripts/mkcd.sh &>
+./README.md:150:[phunc20@homography-x220t 02-shell]$ ./foobar_check.sh ../*
+./README.md:152:Run program ./foobar_check.sh with 2 args and with pid 6376
+./README.md:153:../02-shell contains no word "foobar"
+./README.md:154:../progress.md contains no word "foobar"
+./README.md:158:│   ├── foobar_check.sh
+./README.md:167:foobar_check.sh  project2  project42
+./README.md:179:foobar_check.sh  README.md
+./README.md:190:~/.../youtube/missing-semester/02-shell ❯❯❯ mkdir foo bar
+./README.md:193:-rwxr-xr-x 1 phunc20 wheel  442 Dec  5 16:17 foobar_check.sh
+./README.md:195:drwxr-xr-x 2 phunc20 wheel 4096 Dec  6 10:30 foo
+./README.md:197:~/.../youtube/missing-semester/02-shell ❯❯❯ touch {foo,bar}/{a..j}.txt
+./README.md:198:~/.../youtube/missing-semester/02-shell ❯❯❯ tree {foo,bar}
+./README.md:199:foo
+./README.md:223:~/.../youtube/missing-semester/02-shell ❯❯❯ touch foo/x bar/y
+./README.md:224:~/.../youtube/missing-semester/02-shell ❯❯❯ diff <(ls foo) <(ls bar)
+./01_foobar_check.sh:7:  grep foobar "$file" > /dev/null 2> /dev/null
+./01_foobar_check.sh:10:  # the word "foobar", which can be reflected by the
+./01_foobar_check.sh:13:    echo "$file contains no word \"foobar\""
+~/.../youtube/missing-semester/02-shell ❯❯❯
 ```
 
 
@@ -189,7 +419,8 @@ foobar_check.sh  README.md
     # ...
   done
   ```
-
+## special
+- `Ctrl R`: search command
 
 ## Further reading
 - `man test`
