@@ -1,6 +1,10 @@
 ## Which video?
 - [https://www.youtube.com/watch?v=E-1Y4kSsAFc&t=178s](https://www.youtube.com/watch?v=E-1Y4kSsAFc&t=178s)
 
+## About the title
+- [Fear and Loathing in Las Vegas](https://www.imdb.com/title/tt0120669/)
+
+
 ## Non-default packages
 - In order to `from twisted.internet import reactor, protocol` just install by `pip install twisted`
 
@@ -26,6 +30,14 @@ Out[7]: <coroutine object greeting at 0x7fa84ab8ee40>
 
 In [8]: g = greeting("Beazley")
 
+In [8]: g.send(0)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-4-7fe79daa96e7> in <module>
+----> 1 g.send(0)
+
+TypeError: can't send non-None value to a just-started coroutine
+
 In [9]: g.send(None)
 ---------------------------------------------------------------------------
 StopIteration                             Traceback (most recent call last)
@@ -34,7 +46,7 @@ StopIteration                             Traceback (most recent call last)
 
 StopIteration: Hello Beazley
 
-In [10]: def run(coro):                                                                                                   [57/334]
+In [10]: def run(coro):
     ...:     try:
     ...:         coro.send(None)
     ...:     except StopIteration as e:
@@ -56,13 +68,23 @@ RuntimeError                              Traceback (most recent call last)
 
 RuntimeError: cannot reuse already awaited coroutine
 
+In [11]: g = greeting("Beazley")
+
+In [11]: run(g)
+Out[11]: 'Hello Beazley'
+
 In [12]: run(greeting("Huy"))
 Out[12]: 'Hello Huy'
 
 In [13]: run(greeting("Pike"))
 Out[13]: 'Hello Pike'
+```
 
-In [14]: async def main():                                                                                                [29/334]
+## On stage: `await`
+- Had we not have used `await`
+- Had we used `await`
+```python
+In [14]: async def main():
     ...:     print(await greeting("Guido"))
     ...:
 
@@ -92,6 +114,16 @@ In [18]: type(main())
   type(main())
 RuntimeWarning: Enable tracemalloc to get the object allocation traceback
 Out[18]: coroutine
+
+In [18]: async def main():
+    ...:     print(greeting("Guido"))
+    ...:
+
+In [18]: run(main())
+<coroutine object greeting at 0x7ff34bcf5a70>
+/home/phunc20/.virtualenvs/tf2.3.0-torch1.6.0-py3.7/bin/ipython:2: RuntimeWarning: coroutine 'greeting' was never awaited
+  # -*- coding: utf-8 -*-
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
 
 In [19]: type(greeting)
 Out[19]: function
@@ -124,5 +156,68 @@ Hello Carl
 ```
 
 ## `00:16:57 - ?`, recursive fibonacci numbers with `async`
+```python
+async def fib(n):
+    if n < 2:
+        return 1
+    else:
+        return await fib(n-1) + await fib(n-2)
+
+async def main():
+    for n in range(30):
+        print(await fib(n))
+
+```
+Once run, this gives
+
+```ipython
+In [12]: async def fib(n):
+    ...:     if n < 2:
+    ...:         return 1
+    ...:     else:
+    ...:         return await fib(n-1) + await fib(n-2)
+    ...:
+    ...: async def main():
+    ...:     for n in range(30):
+    ...:         print(await fib(n))
+    ...:
+
+In [13]: run(main())
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+1597
+2584
+4181
+6765
+10946
+17711
+28657
+46368
+75025
+121393
+196418
+317811
+514229
+832040
+
+In [14]:
+
+```
+
+
 
 
