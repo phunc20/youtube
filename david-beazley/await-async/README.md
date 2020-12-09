@@ -214,9 +214,36 @@ In [13]: run(main())
 514229
 832040
 
-In [14]:
+In [14]: fib(30)
+Out[14]: <coroutine object fib at 0x7f2462b29200>
+
+In [15]: run(_)
+Out[15]: 1346269
+
+In [16]: async def main():
+   ...:     print(fib(20))
+   ...:
+
+In [17]: run(main())
+<coroutine object fib at 0x7f2462b325f0>
+/home/phunc20/.virtualenvs/tf2.3.0-torch1.6.0-py3.7/bin/ipython:2: RuntimeWarning: coroutine 'fib' was never awaited
+  # -*- coding: utf-8 -*-
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
 
 ```
+
+
+## Unlike in the video (i.e. unlike back in year 2016)
+![await-in-REPL](fig/await-in-REPL.png)
+<br>
+<br>
+In year 2020, we can `await` in REPL.
+```bash
+In [8]: await fib(10)
+Out[8]: 89
+```
+
 
 
 
