@@ -67,7 +67,7 @@ void ht_set(ht_t *hashtable, const char *key, const char *value) {
 	entry_t *entry = hashtable->entries[slot];
   if (entry == NULL) {
 		entry = ht_pair(key, value);
-		// (?) why the above line is incorrect?
+		// (?) why the above line is incorrect? Biggest bug here!
 		//hashtable->entries[slot] = ht_pair(key, value);
 		return;
 	}

@@ -66,9 +66,9 @@ void ht_set(ht_t *hashtable, const char *key, const char *value) {
 	unsigned int slot = hash(key);
 	entry_t *entry = hashtable->entries[slot];
   if (entry == NULL) {
-		entry = ht_pair(key, value);
+		//entry = ht_pair(key, value);
 		// (?) why the above line is incorrect?
-		//hashtable->entries[slot] = ht_pair(key, value);
+		hashtable->entries[slot] = ht_pair(key, value);
 		return;
 	}
 
@@ -83,11 +83,11 @@ void ht_set(ht_t *hashtable, const char *key, const char *value) {
 			return;
 		}
 		prev = entry;
-		entry = entry->next;
-		//entry = prev->next;
+		//entry = entry->next;
+		entry = prev->next;
 	}
-	entry = ht_pair(key, value);
-	//prev->next = ht_pair(key, value);
+	//entry = ht_pair(key, value);
+	prev->next = ht_pair(key, value);
 }
 
 char *ht_get(ht_t *hashtable, const char *key) {
@@ -153,16 +153,23 @@ int main(int argc, char **argv) {
 	ht_t *ht = ht_create();
 
 	ht_set(ht, "str1", "If");
-	ht_set(ht, "str2", "you");
-	ht_set(ht, "str3", "can't");
-	ht_set(ht, "str4", "convince");
-	ht_set(ht, "str5", "them");
-	ht_set(ht, "str6", ",");
-	ht_set(ht, "str7", "confuse");
-	ht_set(ht, "str8", "them");
-	ht_set(ht, "str9", ".");
+	//ht_set(ht, "str2", "you");
+	//ht_set(ht, "str3", "can't");
+	//ht_set(ht, "str4", "convince");
+	//ht_set(ht, "str5", "them");
+	//ht_set(ht, "str6", ",");
+	//ht_set(ht, "str7", "confuse");
+	//ht_set(ht, "str8", "them");
+	//ht_set(ht, "str9", ".");
 
-	ht_dump(ht);
+	//ht_dump(ht);
+	unsigned int slot = hash("str1");
+	printf("slot = %d\n", slot);
+	entry_t *entry = ht->entries[slot];
+	//char *key = entry->key;
+	//char *value = entry->value;
+	//printf("slot[%d]: %s=%s\n", slot, key, value);
+	printf("slot[%d]: %s=%s\n", slot, entry->key, entry->value);
 
 	return 0;
 }

@@ -12,9 +12,9 @@ typedef struct entry_t {
 	struct entry_t *next;
 } entry_t;
 
-// This is nothing more than an array of pointers to entry_t
 //typedef struct {
 typedef struct ht_t {
+  // This is nothing more than an array of pointers to entry_t
 	entry_t **entries;
 } ht_t;
 
@@ -67,12 +67,11 @@ void ht_set(ht_t *hashtable, const char *key, const char *value) {
 	entry_t *entry = hashtable->entries[slot];
   if (entry == NULL) {
 		entry = ht_pair(key, value);
-		// (?) why the above line is incorrect?
+		// (?) why the above line is incorrect? Biggest bug here!
 		//hashtable->entries[slot] = ht_pair(key, value);
 		return;
 	}
 
-	entry_t *prev;
 	// Walk thru the corresponding linked list
 	while (entry != NULL) {
 		if (strcmp(entry->key, key) == 0) {
@@ -82,12 +81,9 @@ void ht_set(ht_t *hashtable, const char *key, const char *value) {
 			strcpy(entry->value, value);
 			return;
 		}
-		prev = entry;
 		entry = entry->next;
-		//entry = prev->next;
 	}
 	entry = ht_pair(key, value);
-	//prev->next = ht_pair(key, value);
 }
 
 char *ht_get(ht_t *hashtable, const char *key) {
@@ -126,13 +122,9 @@ void my_ht_dump(ht_t *hashtable) {
 
 void ht_dump(ht_t *hashtable) {
 	// for each slot we print one line
-	//entry_t *entry;
 	for (int i=0; i < TABLE_SIZE; ++i) {
-		//printf("i = %d", i);
 		entry_t *entry = hashtable->entries[i];
-		//entry = hashtable->entries[i];
 		if (entry == NULL) {
-		  //printf("NULL\n");
 			continue;
 		}
 
@@ -166,5 +158,3 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
-
-
