@@ -4,7 +4,9 @@
 #include <string.h>
 
 //#define TABLE_SIZE 100000
-#define TABLE_SIZE 10
+//#define TABLE_SIZE 1
+//#define TABLE_SIZE 3
+#define TABLE_SIZE 9
 
 typedef struct entry_t {
 	char *key;
@@ -49,8 +51,9 @@ ht_t *ht_create(void) {
 
 entry_t *ht_pair(const char *key, const char *value) {
 	// cater to the construction of a entry_t: key, value, next
-	entry_t *entry = malloc(sizeof(entry_t));
+	//entry_t *entry = malloc(sizeof(entry_t));
 	//entry_t *entry = malloc(sizeof(entry_t)*1);
+	entry_t *entry = malloc(sizeof(entry_t*));
 	//entry->key = malloc(sizeof(key) + 1);
 	//entry->value = malloc(sizeof(value) + 1);
 	// (!) Your 1st big bug here!
@@ -112,6 +115,8 @@ void my_ht_dump(ht_t *hashtable) {
 		entry_t *entry = hashtable->entries[i];
 		if (entry != NULL)
 			printf("slot[%4d]:", i);
+    else
+      continue;
 		while (entry != NULL) {
 			printf(" %s=%s", entry->key, entry->value);
 			entry = entry->next;
@@ -155,6 +160,7 @@ int main(int argc, char **argv) {
 	ht_set(ht, "str9", ".");
 
 	ht_dump(ht);
+	//my_ht_dump(ht);
 
 	return 0;
 }

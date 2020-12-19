@@ -48,7 +48,7 @@ We'll be implementing Harris corner detection as discussed in class. The basic a
 
 ## 1.1 Compute the structure matrix ##
 
-Fill in `image structure_matrix(image im, float sigma);` in `harris_image.c`. This will perform the first 3 steps of the algorithm: calculating derivatives, the corresponding measures, and the weighted sum of nearby derivative information. As discussed in class, this weighted sum can be easily computed with a Gaussian blur.
+Fill in `image structure_matrix(image im, float sigma);` in `harris_image.c`. This will perform the first 3 steps of the algorithm: calculating derivatives, the corresponding measures, and the weighted sum of nearby derivative information. As discussed in class, this weighted sum can be easily computed with a Gaussian blur. (**Note.** the structure matrix is introduced in **video lecture 06**.)
 
 ### 1.1b Optional: Make a fast smoother ###
 
