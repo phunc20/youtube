@@ -3,10 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#define TABLE_SIZE 100000
-//#define TABLE_SIZE 1
-//#define TABLE_SIZE 3
-#define TABLE_SIZE 9
+#define TABLE_SIZE 3
 
 typedef struct entry_t {
 	char *key;
@@ -75,6 +72,7 @@ void ht_set(ht_t *hashtable, const char *key, const char *value) {
 		return;
 	}
 
+	entry_t *prev;
 	// Walk thru the corresponding linked list
 	while (entry != NULL) {
 		if (strcmp(entry->key, key) == 0) {
@@ -84,9 +82,11 @@ void ht_set(ht_t *hashtable, const char *key, const char *value) {
 			strcpy(entry->value, value);
 			return;
 		}
+    prev = entry;
 		entry = entry->next;
 	}
-	entry = ht_pair(key, value);
+	//entry = ht_pair(key, value);
+	prev->next = ht_pair(key, value);
 }
 
 char *ht_get(ht_t *hashtable, const char *key) {

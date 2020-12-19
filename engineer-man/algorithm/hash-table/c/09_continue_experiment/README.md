@@ -84,4 +84,68 @@ int main(int argc, char **argv) {
 leif@CenterLap-x1carbon ~/git-repos/phunc20/youtube/engineer-man/algorithm/hash-table/c/09_continue_experiment $
 ```
 
-**(?)** Line 52 of `hashfunc.c`: `entry_t *entry = malloc(sizeof(entry_t));` could have been replaced by **`entry_t *entry = malloc(sizeof(entry_t*));`**, right?
+## `my_ht_dump` and `ht_dump`
+These two functions both run fine.
+
+## Diff `TABLE_SIZE`
+- `#define TABLE_SIZE 100000`
+  ```bash
+  ~/.../hash-table/c/09_continue_experiment ❯❯❯ make
+  rm hashfunc
+  #test -f hashfunc && rm hashfunc
+  gcc -o hashfunc hashfunc.c
+  ./hashfunc
+  slot[88166]: str1=If
+  slot[88167]: str2=you
+  slot[88168]: str3=can't
+  slot[88169]: str4=convince
+  slot[88170]: str5=them
+  slot[88171]: str6=,
+  slot[88172]: str7=confuse
+  slot[88173]: str8=them
+  slot[88174]: str9=.
+  ```
+- `#define TABLE_SIZE 1`: **Last bug!!!** -- To be solved in `../10_last_bug/`
+  ```bash
+  ~/.../hash-table/c/09_continue_experiment ❯❯❯ make
+  cc     hashfunc.c   -o hashfunc
+  rm hashfunc
+  #test -f hashfunc && rm hashfunc
+  gcc -o hashfunc hashfunc.c
+  ./hashfunc
+  slot[   0]: str1=If
+  ```
+- `#define TABLE_SIZE 3`
+  ```bash
+  ~/.../hash-table/c/09_continue_experiment ❯❯❯ make
+  cc     hashfunc.c   -o hashfunc
+  rm hashfunc
+  #test -f hashfunc && rm hashfunc
+  gcc -o hashfunc hashfunc.c
+  ./hashfunc
+  slot[   0]: str3=can't
+  slot[   1]: str1=If
+  slot[   2]: str2=you
+  ```
+- `#define TABLE_SIZE 9`
+  ```bash
+  ~/.../hash-table/c/09_continue_experiment ❯❯❯ make
+  cc     hashfunc.c   -o hashfunc
+  rm hashfunc
+  #test -f hashfunc && rm hashfunc
+  gcc -o hashfunc hashfunc.c
+  ./hashfunc
+  slot[   0]: str3=can't
+  slot[   1]: str4=convince
+  slot[   2]: str5=them
+  slot[   3]: str6=,
+  slot[   4]: str7=confuse
+  slot[   5]: str8=them
+  slot[   6]: str9=.
+  slot[   7]: str1=If
+  slot[   8]: str2=you
+  ```
+
+## Q & A
+**(?1)** Line 52 of `hashfunc.c`: `entry_t *entry = malloc(sizeof(entry_t));` could have been replaced by **`entry_t *entry = malloc(sizeof(entry_t*));`**, right?
+**(R1)** My own opinion towards this question is that not only can we replace `entry_t` by `entry_t*`, but, by doing so, the memory allocation would be more precise, i.e. less of a waste.
