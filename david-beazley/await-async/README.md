@@ -12,6 +12,18 @@
 - **`00:00:00`**: start by talking about socket programming, an application/motivation
 - **`00:11:00`**: start talking about **async**, no socket any more
 
+
+## The first example on single-threaded socket
+In my first commit of the current repo, I made a **mistake/bug**
+> I shouldn't have named the python script `socket.py`. Because it contains the line **`import socket`**, the Python interpreter will get confused of which `socket` it should use. Rename it to anything other than `socket.py` resolves the bug.
+
+Here is a sample screenshot done on my laptop. Note that, unlike Mr. Beazley's live session video, my second
+instance of `nc` did not get responded after the first one being stopped.
+<br>
+<br>
+![single-thread-socket](fig/single_thread_succeeded.png)
+
+
 ## `00:11:00 - 00:16:57`, `StopIteration`
 ```python
 In [4]: async def greeting(name):

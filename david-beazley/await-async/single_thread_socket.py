@@ -1,8 +1,14 @@
-import socket
+#import socket
+#from socket import  *
+from socket import AF_INET, SOCK_STREAM, socket, SOL_SOCKET, SO_REUSEADDR
 
 def echo_server(address):
     sock = socket(AF_INET, SOCK_STREAM)
     sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, True)
+
+    #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    #sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+
     sock.bind(address)
     sock.listen(1)
     while True:

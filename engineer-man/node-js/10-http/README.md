@@ -24,6 +24,13 @@ curl: (7) Failed to connect to 127.0.0.1 port 9090: Connection refused
 ~/.../engineer-man/node-js/10-http ❯❯❯
 ```
 
+**Note.** I don't know how to use `nc` in this case to replace `curl`
+```bash
+~/.../engineer-man/node-js/10-http ❯❯❯ # Nothing will happen after the next command
+~/.../engineer-man/node-js/10-http ❯❯❯ nc -e="echo kevin" 127.0.0.1 9090
+~/.../engineer-man/node-js/10-http ❯❯❯
+```
+
 ## Send request using the file `http_client.js`
 Do the same as previously, but this time in the second terminal run
 ```bash
