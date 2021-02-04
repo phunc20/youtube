@@ -1,3 +1,6 @@
 hashfunc
 a.out
-__pycache__
+__pycache__/
+trash.jl
+trash.py
+.ipynb_checkpoints/
